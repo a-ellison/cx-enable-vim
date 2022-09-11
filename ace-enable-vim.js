@@ -1,48 +1,87 @@
 const w = window.wrappedJSObject;
 const app = document.getElementById("app");
 let path = window.location.pathname;
-let connected = false;
+let observerAttached = false;
+let scriptLoaded = false;
+let extensionEnabled = true;
 
-function enable() {
-  let script = document.createElement("script");
-  script.src = browser.runtime.getURL("ace-keybinding-vim.js");
-  script.onload = () => {
-    for (let n of app.getElementsByClassName("ace_editor")) {
-      e = n.wrappedJSObject.env.editor;
-      e.setKeyboardHandler(w.ace.require("ace/keyboard/vim").handler);
+function tryEnable() {
+    if (app.getElementsByClassName("ace_editor").length > 0) {
+        onload = () => {
+            for (let n of app.getElementsByClassName("ace_editor")) {
+                e = n.wrappedJSObject.env.editor;
+                e.setKeyboardHandler(w.ace.require("ace/keyboard/vim").handler);
+            }
+        };
+        if (!scriptLoaded) {
+            let script = document.createElement("script");
+            script.src = browser.runtime.getURL("ace-keybinding-vim.js");
+            script.onload = onload;
+            document.head.appendChild(script);
+            scriptLoaded = true;
+        } else {
+            onload();
+        }
+        return true;
     }
-  };
-  document.head.appendChild(script);
+    return false;
 }
 
 const observer = new MutationObserver((_, observer) => {
-  if (app.getElementsByClassName("ace_editor").length > 0) {
-    observer.disconnect();
-    connected = false;
-    enable();
-  }
+    if (tryEnable()) {
+        observer.disconnect();
+        observerAttached = false;
+    }
 });
 
-function setup() {
-  if (!path.startsWith("/ide2")) {
-    return;
-  }
-  observer.observe(app, {
-    childList: true,
-    subtree: true,
-  });
-  connected = true;
+function attachObserver() {
+    if (!path.startsWith("/ide2")) {
+        return;
+    }
+    observer.observe(app, {
+        childList: true,
+        subtree: true,
+    });
+    observerAttached = true;
 }
 
-setup();
+browser.storage.local.get({ enabled: true }).then((results) => {
+    extensionEnabled = results.enabled;
+    if (extensionEnabled) {
+        if (!tryEnable()) {
+            attachObserver();
+        }
+    }
+});
 
 function onNavigation() {
-  let currentPath = window.location.pathname;
-  if (!connected && path !== currentPath) {
-    path = currentPath;
-    setup();
-  }
+    if (!extensionEnabled) return;
+    let currentPath = window.location.pathname;
+    if (!observerAttached && path !== currentPath) {
+        path = currentPath;
+        attachObserver();
+    }
 }
 
 window.addEventListener("popstate", onNavigation);
 window.addEventListener("click", onNavigation);
+
+browser.storage.local.onChanged.addListener((changes) => {
+    extensionEnabled = changes.enabled.newValue;
+    if (extensionEnabled) {
+        if (!tryEnable()) {
+            attachObserver();
+        }
+    } else {
+        if (observerAttached) {
+            observer.disconnect();
+            observerAttached = false;
+        }
+        // set keybindings back to the default
+        for (let n of app.getElementsByClassName("ace_editor")) {
+            e = n.wrappedJSObject.env.editor;
+            e.setKeyboardHandler("");
+        }
+        path = "";
+    }
+});
