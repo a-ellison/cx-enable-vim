@@ -5,23 +5,15 @@
   "description": "Enables vim mode in the javascript IDE (https://ace.c9.io/) used in Code Expert (https://expert.ethz.ch/).",
   "content_scripts": [
     {
-      "matches": [
-        "*://expert.ethz.ch/*"
-      ],
-      "js": [
-        "ace-enable-vim.js"
-      ]
+      "matches": ["*://expert.ethz.ch/*"],
+      "js": ["browser-polyfill.min.js", "ace-enable-vim.js"]
     }
   ],
-  "permissions": [
-      "storage"
-  ],
+  "permissions": ["storage"],
   "background": {
-    "scripts": ["toggle.js"]
+    "scripts": ["browser-polyfill.min.js", "toggle.js"]
   },
-  "web_accessible_resources": [
-    "ace-keybinding-vim.js"
-  ],
+  "web_accessible_resources": ["ace-keybinding-vim.js"],
   "browser_action": {
     "default_icon": "icon.png"
   },
