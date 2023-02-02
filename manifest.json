@@ -24,7 +24,9 @@
     ]
   },
   "web_accessible_resources": [
-    "ace-keybinding-vim.js"
+    "ace-keybinding-vim.js",
+    "set-vim-keyboard-handler.js",
+    "set-default-keyboard-handler.js"
   ],
   "browser_action": {
     "default_icon": "icon.png"

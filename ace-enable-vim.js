@@ -1,4 +1,3 @@
-const w = window.wrappedJSObject;
 const app = document.getElementById("app");
 let path = window.location.pathname;
 let observerAttached = false;
@@ -8,10 +7,15 @@ let extensionEnabled = true;
 function tryEnable() {
     if (app.getElementsByClassName("ace_editor").length > 0) {
         onload = () => {
-            for (let n of app.getElementsByClassName("ace_editor")) {
-                e = n.wrappedJSObject.env.editor;
-                e.setKeyboardHandler(w.ace.require("ace/keyboard/vim").handler);
+            // inject script to set editor keyboard handler into DOM
+            let script = document.getElementById("set-keyboard-handler")
+            if (script) {
+                script.remove()
             }
+            script = document.createElement("script");
+            script.src = browser.runtime.getURL("set-keyboard-handler.js");
+            script.id = "set-keyboard-handler"
+            document.head.appendChild(script);
         };
         if (!scriptLoaded) {
             let script = document.createElement("script");
