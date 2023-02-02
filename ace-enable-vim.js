@@ -4,18 +4,23 @@ let observerAttached = false;
 let scriptLoaded = false;
 let extensionEnabled = true;
 
+// makes sure to delete the script from head first if it already exists and then injects `file`
+function reinjectScript(file) {
+    let script = document.getElementById(file)
+    if (script) {
+        script.remove()
+    }
+    script = document.createElement("script");
+    script.src = browser.runtime.getURL(file);
+    script.id = file
+    document.head.appendChild(script);
+}
+
 function tryEnable() {
     if (app.getElementsByClassName("ace_editor").length > 0) {
         onload = () => {
-            // inject script to set editor keyboard handler into DOM
-            let script = document.getElementById("set-keyboard-handler")
-            if (script) {
-                script.remove()
-            }
-            script = document.createElement("script");
-            script.src = browser.runtime.getURL("set-keyboard-handler.js");
-            script.id = "set-keyboard-handler"
-            document.head.appendChild(script);
+            // inject script into DOM to set editor keyboard handler
+            reinjectScript("set-vim-keyboard-handler.js")
         };
         if (!scriptLoaded) {
             let script = document.createElement("script");
@@ -81,11 +86,7 @@ browser.storage.local.onChanged.addListener((changes) => {
             observer.disconnect();
             observerAttached = false;
         }
-        // set keybindings back to the default
-        for (let n of app.getElementsByClassName("ace_editor")) {
-            e = n.wrappedJSObject.env.editor;
-            e.setKeyboardHandler("");
-        }
+        reinjectScript("set-default-keyboard-handler.js")
         path = "";
     }
 });
