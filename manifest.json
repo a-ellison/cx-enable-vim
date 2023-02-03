@@ -1,27 +1,22 @@
 {
   "manifest_version": 2,
   "name": "CX Enable Vim",
-  "version": "1.5",
+  "version": "1.6",
   "description": "Enables vim mode in the javascript IDE (https://ace.c9.io/) used in Code Expert (https://expert.ethz.ch/).",
+  "icons": {
+    "16": "icon-16x16.png",
+    "48": "icon-48x48.png",
+    "128": "icon-128x128.png"
+  },
   "content_scripts": [
     {
-      "matches": [
-        "*://expert.ethz.ch/*"
-      ],
-      "js": [
-        "browser-polyfill.min.js",
-        "ace-enable-vim.js"
-      ]
+      "matches": ["*://expert.ethz.ch/*"],
+      "js": ["browser-polyfill.min.js", "ace-enable-vim.js"]
     }
   ],
-  "permissions": [
-    "storage"
-  ],
+  "permissions": ["storage"],
   "background": {
-    "scripts": [
-      "browser-polyfill.min.js",
-      "toggle.js"
-    ]
+    "scripts": ["browser-polyfill.min.js", "toggle.js"]
   },
   "web_accessible_resources": [
     "ace-keybinding-vim.js",
