@@ -1,16 +1,12 @@
-let extensionEnabled;
-
-browser.storage.local.get({ enabled: true }).then((results) => {
-  extensionEnabled = results.enabled;
-
-  // toggle extension when icon is clicked
-  browser.browserAction.onClicked.addListener(() => {
-    extensionEnabled = !extensionEnabled;
-    browser.storage.local.set({ enabled: extensionEnabled });
-    if (extensionEnabled) {
-      browser.browserAction.setIcon({ path: "icon.png" });
-    } else {
-      browser.browserAction.setIcon({ path: "icon-grayscale.png" });
-    }
-  });
+// toggle extension when icon is clicked
+browser.browserAction.onClicked.addListener(() => {
+    browser.storage.local.get({ enabled: true }).then((results) => {
+        let enabled = !results.enabled;
+        if (enabled) {
+            browser.browserAction.setIcon({ path: "icon.png" });
+        } else {
+            browser.browserAction.setIcon({ path: "icon-grayscale.png" });
+        }
+        browser.storage.local.set({ enabled });
+    });
 });
