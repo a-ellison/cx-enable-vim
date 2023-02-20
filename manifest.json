@@ -18,11 +18,15 @@
   "background": {
     "service_worker": "background_scripts.js"
   },
-  "web_accessible_resources": [
-    "ace-keybinding-vim.js",
-    "set-vim-keyboard-handler.js",
-    "set-default-keyboard-handler.js"
-  ],
+  "web_accessible_resources": [{
+    "resources": [
+      "ace-keybinding-vim.js",
+      "set-vim-keyboard-handler.js",
+      "set-default-keyboard-handler.js"
+    ],
+    "matches": ["*://expert.ethz.ch/*"],
+    "extension_ids": []
+  }],
   "action": {
     "default_icon": "icon.png"
   },

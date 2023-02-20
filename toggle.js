@@ -1,8 +1,8 @@
 function setIcon(enabled) {
   if (enabled) {
-    browser.browserAction.setIcon({ path: "icon.png" });
+    browser.action.setIcon({ path: "icon.png" });
   } else {
-    browser.browserAction.setIcon({ path: "icon-grayscale.png" });
+    browser.action.setIcon({ path: "icon-grayscale.png" });
   }
 }
 
@@ -12,7 +12,7 @@ browser.storage.local.get({ enabled: true }).then((results) => {
 });
 
 // toggle extension when icon is clicked
-browser.browserAction.onClicked.addListener(() => {
+browser.action.onClicked.addListener(() => {
   browser.storage.local.get({ enabled: true }).then((results) => {
     let enabled = !results.enabled;
     setIcon(enabled);
