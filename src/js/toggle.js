@@ -7,8 +7,10 @@ function setIcon(enabled) {
 }
 
 // initialize icon to match current value of `enabled`
-browser.storage.local.get({ enabled: true }).then((results) => {
-  setIcon(results.enabled);
+browser.runtime.onStartup.addListener(() => {
+  browser.storage.local.get({ enabled: true }).then((results) => {
+    setIcon(results.enabled);
+  });
 });
 
 // toggle extension when icon is clicked
