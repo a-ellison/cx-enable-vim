@@ -2,10 +2,14 @@
 
 # CX Enable Vim
 
-Firefox add-on to enable vim mode in the javascript IDE (https://ace.c9.io/) used in Code Expert (https://expert.ethz.ch/). <br/>
-Add-on listing: https://addons.mozilla.org/en-US/firefox/addon/cx-enable-vim/
+The [JavaScript IDE](https://ace.c9.io/) used by [Code Expert](https://expert.ethz.ch/) supports vim keybindings. This add-on enables them. <br/>
+The add-on can be disabled by clicking on its icon in the toolbar.
+
+## Installation
+
+- [Firefox](https://addons.mozilla.org/en-US/firefox/addon/cx-enable-vim/)
 
 ## Permissions
 
-- "Access your data for expert.ethz.ch": needed to load javascript on expert.ethz.ch
-- storage: used to toggle add-on on and off
+- "Access your data for expert.ethz.ch": Needed to load JavaScript on expert.ethz.ch. JavaScript is used to enable the add-on functionality.
+- storage: Used to toggle the add-on on and off.
