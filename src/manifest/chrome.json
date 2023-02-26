@@ -31,10 +31,5 @@
   ],
   "action": {
     "default_icon": "icons/icon.png"
-  },
-  "browser_specific_settings": {
-    "gecko": {
-      "id": "3486b8b3-982a-482c-8dfb-77ad9c4550c3@example.com"
-    }
   }
 }
