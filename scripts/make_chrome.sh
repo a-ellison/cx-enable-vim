@@ -1,6 +1,6 @@
-mkdir -p dist/src/firefox
-mkdir -p dist/web-ext/firefox
-cp -r src/js dist/firefox/js
-cp -r src/icons dist/firefox/icons
-cp src/manifest/firefox.json dist/firefox/manifest.json
-web-ext build -s dist/src/firefox -a dist/web-ext/firefox -o
+mkdir -p dist/chrome/src
+mkdir -p dist/chrome/web-ext-artifacts
+cp -r src/js dist/chrome/src
+cp -r src/icons dist/chrome/src
+cp src/manifest/chrome.json dist/chrome/src/manifest.json
+web-ext build -s dist/chrome/src -a dist/chrome/web-ext-artifacts -o
