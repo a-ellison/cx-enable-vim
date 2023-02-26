@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "CX Enable Vim",
   "version": "1.6",
-  "description": "Enables vim mode in the javascript IDE (https://ace.c9.io/) used in Code Expert (https://expert.ethz.ch/).",
+  "description": "Enable vim mode in Code Expert",
   "icons": {
     "16": "icons/icon-16x16.png",
     "48": "icons/icon-48x48.png",
