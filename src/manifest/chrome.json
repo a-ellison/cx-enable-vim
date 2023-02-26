@@ -4,31 +4,33 @@
   "version": "1.6",
   "description": "Enables vim mode in the javascript IDE (https://ace.c9.io/) used in Code Expert (https://expert.ethz.ch/).",
   "icons": {
-    "16": "icon-16x16.png",
-    "48": "icon-48x48.png",
-    "128": "icon-128x128.png"
+    "16": "icons/icon-16x16.png",
+    "48": "icons/icon-48x48.png",
+    "128": "icons/icon-128x128.png"
   },
   "content_scripts": [
     {
       "matches": ["*://expert.ethz.ch/*"],
-      "js": ["browser-polyfill.min.js", "ace-enable-vim.js"]
+      "js": ["js/browser-polyfill.min.js", "js/ace-enable-vim.js"]
     }
   ],
   "permissions": ["storage"],
   "background": {
-    "service_worker": "background_scripts.js"
+    "service_worker": "js/background_scripts.js"
   },
-  "web_accessible_resources": [{
-    "resources": [
-      "ace-keybinding-vim.js",
-      "set-vim-keyboard-handler.js",
-      "set-default-keyboard-handler.js"
-    ],
-    "matches": ["*://expert.ethz.ch/*"],
-    "extension_ids": []
-  }],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "js/ace-keybinding-vim.js",
+        "js/set-vim-keyboard-handler.js",
+        "js/set-default-keyboard-handler.js"
+      ],
+      "matches": ["*://expert.ethz.ch/*"],
+      "extension_ids": []
+    }
+  ],
   "action": {
-    "default_icon": "icon.png"
+    "default_icon": "icons/icon.png"
   },
   "browser_specific_settings": {
     "gecko": {

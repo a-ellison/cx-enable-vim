@@ -1,8 +1,8 @@
 function setIcon(enabled) {
   if (enabled) {
-    browser.action.setIcon({ path: "icon.png" });
+    browser.action.setIcon({ path: "../icons/icon.png" });
   } else {
-    browser.action.setIcon({ path: "icon-grayscale.png" });
+    browser.action.setIcon({ path: "../icons/icon-grayscale.png" });
   }
 }
 

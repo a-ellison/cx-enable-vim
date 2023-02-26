@@ -18,12 +18,12 @@ function reinjectScript(file) {
 function enableVimMode() {
   onload = () => {
     // inject script into DOM to set editor keyboard handler
-    reinjectScript("set-vim-keyboard-handler.js");
+    reinjectScript("js/set-vim-keyboard-handler.js");
   };
   // avoid adding the script to the document head multiple times
   if (!scriptLoaded) {
     let script = document.createElement("script");
-    script.src = browser.runtime.getURL("ace-keybinding-vim.js");
+    script.src = browser.runtime.getURL("js/ace-keybinding-vim.js");
     script.onload = onload;
     document.head.appendChild(script);
     scriptLoaded = true;
@@ -106,6 +106,6 @@ browser.storage.local.onChanged.addListener((changes) => {
     if (observerAttached) {
       detachObserver();
     }
-    reinjectScript("set-default-keyboard-handler.js");
+    reinjectScript("js/set-default-keyboard-handler.js");
   }
 });
