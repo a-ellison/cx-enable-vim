@@ -1,13 +1,15 @@
-<p><img alt="CX Enable Vim" width="96" src="./icon.png"/></p>
+<p><img alt="CX Enable Vim" width="96" src="./src/icons/icon.png"/></p>
 
 # CX Enable Vim
 
-The [JavaScript IDE](https://ace.c9.io/) used by [Code Expert](https://expert.ethz.ch/) supports vim keybindings. This add-on enables them. <br/>
+The [JavaScript IDE](https://ace.c9.io/) used by [Code Expert](https://expert.ethz.ch/) supports vim keybindings. This add-on enables them.
+
 The add-on can be disabled by clicking on its icon in the toolbar.
 
 ## Installation
 
 - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/cx-enable-vim/)
+- [Google Chrome](https://chrome.google.com/webstore/detail/cx-enable-vim/dahlligiknfidjlkcjllhhkdkmcccapm)
 
 ## Permissions
 
