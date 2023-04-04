@@ -10,6 +10,7 @@ The add-on can be disabled by clicking on its icon in the toolbar.
 
 - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/cx-enable-vim/)
 - [Google Chrome](https://chrome.google.com/webstore/detail/cx-enable-vim/dahlligiknfidjlkcjllhhkdkmcccapm)
+- [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/cx-enable-vim/dnacnfdfpfbpfnkgoleafipcebpmapcd)
 
 ## Permissions
 
